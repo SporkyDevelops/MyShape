@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class App {
@@ -57,6 +58,9 @@ public class App {
     }
 
     public static void main(String[] args) throws Exception {
+
+        //formats to 5 decimal places
+        DecimalFormat df = new DecimalFormat("#.####");
 
         //variables for dimensions
         double length;
@@ -139,8 +143,8 @@ public class App {
 
             //calculates perimeter and area of rectangle, 2 arguments (length and width)
             System.out.println(CLEAR_SCREEN);
-            System.out.println("The " + ANSI_CYAN + "PERIMETER" + CLEAR_ANSI + " of your Rectangle is: " + ANSI_GREEN + perimeter(length, width, 0) + CLEAR_ANSI);
-            System.out.println("The " + ANSI_CYAN + "AREA" + CLEAR_ANSI + " of your Rectangle is: " + ANSI_GREEN + area(length, width) + CLEAR_ANSI);
+            System.out.println("The " + ANSI_CYAN + "PERIMETER" + CLEAR_ANSI + " of your Rectangle is: " + ANSI_GREEN + df.format(perimeter(length, width, 0)) + CLEAR_ANSI);
+            System.out.println("The " + ANSI_CYAN + "AREA" + CLEAR_ANSI + " of your Rectangle is: " + ANSI_GREEN + df.format(area(length, width)) + CLEAR_ANSI);
 
 
         } else if(selection.equals("Circle")){
@@ -151,8 +155,8 @@ public class App {
 
             //calculates perimeter and area, single argument (radius)
             System.out.print(CLEAR_SCREEN);
-            System.out.println("The " + ANSI_CYAN + "PERIMETER" + CLEAR_ANSI + " of your Circle is: " + ANSI_GREEN + perimeter(length, 0, 0) + CLEAR_ANSI);
-            System.out.println("The " + ANSI_CYAN + "AREA" + CLEAR_ANSI + " of your Circle is: " + ANSI_GREEN + area(length, 0) + CLEAR_ANSI);
+            System.out.println("The " + ANSI_CYAN + "PERIMETER" + CLEAR_ANSI + " of your Circle is: " + ANSI_GREEN + df.format(perimeter(length, 0, 0)) + CLEAR_ANSI);
+            System.out.println("The " + ANSI_CYAN + "AREA" + CLEAR_ANSI + " of your Circle is: " + ANSI_GREEN + df.format(area(length, 0)) + CLEAR_ANSI);
 
         } else {
 
@@ -171,8 +175,8 @@ public class App {
             //Calls methods to calculate the area and perimeter
             //Uses side B for Base in area calculation
             System.out.print(CLEAR_SCREEN);
-            System.out.println("The " + ANSI_CYAN + "PERIMETER" + CLEAR_ANSI + " of your Triangle is: " + ANSI_GREEN + perimeter(length, width, triangleSide) + CLEAR_ANSI);
-            System.out.println("The " + ANSI_CYAN + "AREA" + CLEAR_ANSI + " of your Triangle is: " + ANSI_GREEN + area(width, height) + CLEAR_ANSI);
+            System.out.println("The " + ANSI_CYAN + "PERIMETER" + CLEAR_ANSI + " of your Triangle is: " + ANSI_GREEN + df.format(perimeter(length, width, triangleSide)) + CLEAR_ANSI);
+            System.out.println("The " + ANSI_CYAN + "AREA" + CLEAR_ANSI + " of your Triangle is: " + ANSI_GREEN + df.format(area(width, height)) + CLEAR_ANSI);
 
         }
 
