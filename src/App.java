@@ -17,24 +17,32 @@ public class App {
         //static String (stores menu selection)
         static String selection = null;
 
+        //formats to 5 decimal places
+        static DecimalFormat df = new DecimalFormat("#.####");
 
-    static double perimeter(double sideA, double sideB, double sideC){
-        //variable to hold return value
-        double perimeter = 0;
+
+    static void perimeter(double sideA, double sideB, double sideC){
+
+        //double perimeter = 0;
 
         if(selection.equals("Rectangle")){
             //Rectangle -> Length+Width+Length+Width
-            perimeter = sideA+sideB+sideA+sideB;
+            System.out.println("The " + ANSI_CYAN + "PERIMETER" + CLEAR_ANSI + " of your Rectangle is: " + ANSI_GREEN + df.format(sideA + sideB + sideA + sideB) + CLEAR_ANSI);
+
+            //perimeter = sideA+sideB+sideA+sideB;
         } else if(selection.equals("Circle")){
             // Cirlce -> 2πr
-            perimeter = 2*(Math.PI*sideA);
+            System.out.println("The " + ANSI_CYAN + "CIRCUMFERENCE" + CLEAR_ANSI + " of your Circle is: " + ANSI_GREEN + df.format(2*(Math.PI*sideA)) + CLEAR_ANSI);
+
+            //perimeter = 2*(Math.PI*sideA);
         } else {
             //Triangle -> (self explanitory)
-            perimeter = sideA+sideB+sideC;
+            System.out.println("The " + ANSI_CYAN + "PERIMETER" + CLEAR_ANSI + " of your Triangle is: " + ANSI_GREEN + df.format(sideA + sideB + sideC) + CLEAR_ANSI);
+
+            //perimeter = sideA+sideB+sideC;
         }
         
-        //returns value after calculations
-        return perimeter;
+        //return perimeter;
     }
 
     static double area(double sideA, double sideB){
@@ -58,9 +66,6 @@ public class App {
     }
 
     public static void main(String[] args) throws Exception {
-
-        //formats to 5 decimal places
-        DecimalFormat df = new DecimalFormat("#.####");
 
         //variables for dimensions
         double length;
@@ -143,7 +148,8 @@ public class App {
 
             //calculates perimeter and area of rectangle, 2 arguments (length and width)
             System.out.println(CLEAR_SCREEN);
-            System.out.println("The " + ANSI_CYAN + "PERIMETER" + CLEAR_ANSI + " of your Rectangle is: " + ANSI_GREEN + df.format(perimeter(length, width, 0)) + CLEAR_ANSI);
+            perimeter(length, width, 0);
+            //System.out.println("The " + ANSI_CYAN + "PERIMETER" + CLEAR_ANSI + " of your Rectangle is: " + ANSI_GREEN + df.format(perimeter(length, width, 0)) + CLEAR_ANSI);
             System.out.println("The " + ANSI_CYAN + "AREA" + CLEAR_ANSI + " of your Rectangle is: " + ANSI_GREEN + df.format(area(length, width)) + CLEAR_ANSI);
 
 
@@ -155,7 +161,8 @@ public class App {
 
             //calculates perimeter and area, single argument (radius)
             System.out.print(CLEAR_SCREEN);
-            System.out.println("The " + ANSI_CYAN + "PERIMETER" + CLEAR_ANSI + " of your Circle is: " + ANSI_GREEN + df.format(perimeter(length, 0, 0)) + CLEAR_ANSI);
+            perimeter(length, 0, 0);
+            //System.out.println("The " + ANSI_CYAN + "CIRCUMFERENCE" + CLEAR_ANSI + " of your Circle is: " + ANSI_GREEN + df.format(perimeter(length, 0, 0)) + CLEAR_ANSI);
             System.out.println("The " + ANSI_CYAN + "AREA" + CLEAR_ANSI + " of your Circle is: " + ANSI_GREEN + df.format(area(length, 0)) + CLEAR_ANSI);
 
         } else {
@@ -175,7 +182,8 @@ public class App {
             //Calls methods to calculate the area and perimeter
             //Uses side B for Base in area calculation
             System.out.print(CLEAR_SCREEN);
-            System.out.println("The " + ANSI_CYAN + "PERIMETER" + CLEAR_ANSI + " of your Triangle is: " + ANSI_GREEN + df.format(perimeter(length, width, triangleSide)) + CLEAR_ANSI);
+            perimeter(length, width, triangleSide);
+            //System.out.println("The " + ANSI_CYAN + "PERIMETER" + CLEAR_ANSI + " of your Triangle is: " + ANSI_GREEN + df.format(perimeter(length, width, triangleSide)) + CLEAR_ANSI);
             System.out.println("The " + ANSI_CYAN + "AREA" + CLEAR_ANSI + " of your Triangle is: " + ANSI_GREEN + df.format(area(width, height)) + CLEAR_ANSI);
 
         }
