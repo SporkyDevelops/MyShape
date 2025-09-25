@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class App {
 
-        //ANSI Styling codes
+        //ANSI Styling
         final static String CLEAR_ANSI = "\u001B[0m";
         final static String ANSI_RED = "\u001B[31m";
         final static String ANSI_GREEN = "\u001B[32m";
@@ -13,12 +13,12 @@ public class App {
         //Clears screen and resets cursor
         final static String CLEAR_SCREEN = "\u001B[2J\u001B[H";
 
-        //static String to allow use in all methods (stores0 menu selection)
+        //static String (stores menu selection)
         static String selection = null;
 
 
     static double perimeter(double sideA, double sideB, double sideC){
-        //variable to hold return value (initiallized to 0)
+        //variable to hold return value
         double perimeter = 0;
 
         if(selection.equals("Rectangle")){
@@ -37,7 +37,7 @@ public class App {
     }
 
     static double area(double sideA, double sideB){
-        //variable to hold value (used to return calculation) initiallized ot 0
+        //variable to hold return value
         double area = 0;
 
         if(selection.equals("Rectangle")){
@@ -58,7 +58,7 @@ public class App {
 
     public static void main(String[] args) throws Exception {
 
-        //variables for calculations
+        //variables for dimensions
         double length;
         double width;
         double triangleSide;
@@ -66,17 +66,14 @@ public class App {
 
         Scanner scan = new Scanner(System.in);
 
-        //while loop condition
         boolean menu = true;
-
-        //character used in menu to signify shapeIndex/selection
         String arrow = "➜ ";
 
-        //Shapes array and index (for menu)
+        //Shapes array and variable for tracking index (for menu)
         String[] shapes = {"Rectangle", "Circle", "Triangle"};
         int shapeIndex = 0;
 
-        //While loop to draw scrolling start menu
+        //While loop to draw menu
         while(menu) {
             
             //Clears screen every loop
@@ -88,7 +85,7 @@ public class App {
             for(int i = 0; i < shapes.length; i++){
 
                 if(i == shapeIndex){
-                    System.out.println(ANSI_GREEN + arrow + shapes[i] + CLEAR_ANSI);
+                    System.out.println(ANSI_GREEN + "\033[1m" + arrow + shapes[i] + "\033[0m" + CLEAR_ANSI);
 
                     //Sets variable 'selection' to current shape (as long as it matches the shapeIndex)
                     selection = shapes[i];
@@ -98,40 +95,43 @@ public class App {
                 }
             }
 
-            System.out.println("\nSelect with 'Enter', scroll with 's', or quit with 'q': ");
+            System.out.print("\nSelect with " + ANSI_MAGENTA + "'Enter'" + CLEAR_ANSI);
+            System.out.print(", scroll by entering " + ANSI_MAGENTA + "'s'" + CLEAR_ANSI);
+            System.out.print(", or quit by entering " + ANSI_MAGENTA + "'q'" + CLEAR_ANSI + ": ");
             String input = scan.nextLine();
 
             //Checks if input is empty (ENTER is pressed by itself)
             if(input.isEmpty()){
                 
                 //Exits menu and prints selection
-                System.out.println(CLEAR_SCREEN);
+                System.out.print(CLEAR_SCREEN);
                 System.out.println(ANSI_CYAN + selection + CLEAR_ANSI);
                 menu = false;
 
             } else if(input.equalsIgnoreCase("q")){ //checks if 'q' is typed (and entered)
 
             //Prints exit message and exits program with status '0'
-                System.out.println(CLEAR_SCREEN);
-                System.out.println("Exiting");
+                System.out.print(CLEAR_SCREEN);
+                System.out.print(ANSI_RED + "Exiting");
                 System.exit(0);
 
             } else if(input.equalsIgnoreCase("s")){ //checks if 's' is typed (and entered)
 
-                //adds 1 to shapeIndex (moves selection down by one) and loops back to first selection if value is > 3 (length of shapes array)
+                //adds 1 to shapeIndex (moves selection down by one) and loops back to first shape if value is > size of array
                 shapeIndex = (shapeIndex + 1) % shapes.length;
 
-            } else {
+            } else { //if anything else is typed
 
+                System.out.print(CLEAR_SCREEN);
                 //error handling
-                System.out.println(ANSI_RED + "Invalid input type" + CLEAR_ANSI);
+                System.out.print(ANSI_RED + "Invalid input type [" + input + "]");
                 System.exit(0);
             }
         }
 
         if(selection.equals("Rectangle")){
 
-            //Takes input for rectangles sides
+            //Takes input for rectangle dimensions
             System.out.print("Please input Rectangle length: ");
             length = scan.nextDouble();
             System.out.print("Please input Rectangle width: ");
@@ -156,9 +156,10 @@ public class App {
 
         } else {
 
-            //Take inputs to determine Triangle values - stores in 'length' 'width' 'triangleSide' 'base' and 'height'
+            //Take inputs to determine Triangle dimensions
             System.out.print("Please input Triangle Side A length: ");
             length = scan.nextDouble();
+            //Value for side B/Base
             System.out.print("Please input Triangle Side B \033[1m(Base)\033[0m length: ");
             width = scan.nextDouble();
             System.out.print("Please input Triangle Side C length: ");
@@ -167,7 +168,7 @@ public class App {
             System.out.print("Please input Triangle Height: ");
             height = scan.nextDouble();
 
-            //Calls methods to calculate the area and perimeter (3 arguments for perimeter)
+            //Calls methods to calculate the area and perimeter
             //Uses side B for Base in area calculation
             System.out.print(CLEAR_SCREEN);
             System.out.println("The " + ANSI_CYAN + "PERIMETER" + CLEAR_ANSI + " of your Triangle is: " + ANSI_GREEN + perimeter(length, width, triangleSide) + CLEAR_ANSI);
